@@ -1,15 +1,56 @@
-const bulb = document.getElementById("bulb");
-const button = document.getElementById("toggleButton");
-let isOn = false;
+const display = document.getElementById("display");
+const buttons = document.querySelectorAll(".btn");
 
-button.addEventListener("click", () => {
-    isOn = !isOn;
+let currentInput = "";
 
-    if (isOn) {
-        bulb.src = "https://www.w3schools.com/js/pic_bulbon.gif"; // Bulb on image
-        button.textContent = "Turn Off";
-    } else {
-        bulb.src = "https://www.w3schools.com/js/pic_bulboff.gif"; // Bulb off image
-        button.textContent = "Turn On";
+// Handle button clicks
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        const value = button.getAttribute("data-value");
+
+        if (value === "C") {
+            currentInput = "";
+            display.value = "";
+        } 
+        else if (value === "=") {
+            try {
+                currentInput = eval(currentInput).toString();
+                display.value = currentInput;
+            } catch {
+                display.value = "Error";
+                currentInput = "";
+            }
+        } 
+        else {
+            currentInput += value;
+            display.value = currentInput;
+        }
+    });
+});
+
+// Keyboard support (pro feature)
+document.addEventListener("keydown", (e) => {
+    const key = e.key;
+
+    if (!isNaN(key) || ["+", "-", "*", "/", "."].includes(key)) {
+        currentInput += key;
+        display.value = currentInput;
+    } 
+    else if (key === "Enter") {
+        try {
+            currentInput = eval(currentInput).toString();
+            display.value = currentInput;
+        } catch {
+            display.value = "Error";
+            currentInput = "";
+        }
+    } 
+    else if (key === "Backspace") {
+        currentInput = currentInput.slice(0, -1);
+        display.value = currentInput;
+    } 
+    else if (key === "Escape") {
+        currentInput = "";
+        display.value = "";
     }
 });
