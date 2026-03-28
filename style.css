@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: sans-serif;
 }
 
 body {
@@ -10,86 +10,88 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-}
-
-/* Calculator Card */
-.calculator {
-  width: 320px;
-  padding: 20px;
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-}
-
-/* Display */
-#display {
-  width: 100%;
-  height: 70px;
-  border: none;
-  border-radius: 15px;
-  padding: 15px;
-  font-size: 1.8rem;
-  text-align: right;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  outline: none;
-  margin-bottom: 15px;
-}
-
-/* Grid */
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-/* Buttons */
-.btn {
-  height: 60px;
-  border: none;
-  border-radius: 15px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  transition: all 0.2s ease;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-  background: rgba(255,255,255,0.2);
-}
-
-/* Operators */
-.operator {
-  background: #ff7a18;
+  background: #111;
   color: white;
 }
 
-/* Equal */
-.equal {
-  background: #00c853;
-  grid-row: span 2;
-}
-
-/* Zero button */
-.zero {
-  grid-column: span 2;
-}
-
-/* Footer */
-.footer {
+/* Container */
+.container {
   text-align: center;
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: #ddd;
 }
 
-/* Responsive */
-@media (max-width: 400px) {
-  .calculator {
-    width: 90%;
-  }
+/* Bulb */
+.bulb {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 20px auto;
+  background: #333;
+  transition: 0.4s;
+  box-shadow: inset 0 0 20px #000;
+}
+
+/* Bulb ON */
+.bulb.on {
+  background: #ffd54f;
+  box-shadow:
+    0 0 20px #ffd54f,
+    0 0 40px #ffd54f,
+    0 0 80px #ffeb3b;
+}
+
+/* Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+/* Hide checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background: #555;
+  border-radius: 30px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+/* Circle */
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+/* ON state */
+input:checked + .slider {
+  background: #4caf50;
+}
+
+input:checked + .slider::before {
+  transform: translateX(30px);
+}
+
+/* Text */
+.text {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #ccc;
 }
